@@ -22,7 +22,7 @@ const inlineSource = false;
 const outDest = 'out';
 
 // If all VS Code langaues are support you can use nls.coreLanguages
-const languages = [{ folderName: 'jpn', id: 'ja' }];
+const languages = [{ folderName: 'zh-CN', id: 'zh-cn' }];
 
 const cleanTask = function () {
     return del(['out/**', 'package.nls.*.json', 'i18n-sample*.vsix']);
@@ -49,7 +49,7 @@ const doCompile = function (buildNls) {
         .pipe(sourcemaps.init())
         .pipe(tsProject()).js
         .pipe(buildNls ? nls.rewriteLocalizeCalls() : es.through())
-        .pipe(buildNls ? nls.createAdditionalLanguageFiles(languages, 'i18n', 'out') : es.through());
+        .pipe(buildNls ? nls.createAdditionalLanguageFiles(languages, 'i18n', 'src') : es.through());
 
     if (inlineMap && inlineSource) {
         r = r.pipe(sourcemaps.write());
